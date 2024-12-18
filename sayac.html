@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAYAÇ</title>
+    <link rel="stylesheet" href="sayac.css">
+   
+</head>
+
+   <div class="anasayfa">
+    
+<div class="gerisayma">
+    <span id="gerisayım">00:00</span>
+</div>
+ <div class="butonlar">
+    <button id="baslatButonu">START</button>
+    <button id="alarmDurdurButonu" style="display: none;">STOP THE ALARM</button>
+    <button id="resetleButonu" style="display: none;">RESET</button>
+    <label for="zamanSec"></label>
+    <select id="zamanSec">
+    </div>
+        <option value="1">1 MINUTE</option>
+        <option value="2">2 MINUTE</option>
+        <option value="3">3 MINUTE</option>
+        <option value="4">4 MINUTE</option>
+        <option value="5">5 MINUTE</option>
+        <option value="10">10 MINUTE</option>
+        <option value="15">15 MINUTE</option>
+        <option value="20">20 MINUTE</option>
+        <option value="30">30 MINUTE</option>
+        <option value="60">60 MINUTE</option>
+    </select>
+    </div>
+    
+
+    <audio id="alarm" src="Clock-With-Alarm.mp3" preload="auto"></audio>
+
+    <script>
+        let countDownTime = 1 * 60; 
+        let timer;
+        let isRunning = false;
+
+        const countDownElement = document.getElementById("gerisayım");
+        const startButton = document.getElementById("baslatButonu");
+        const resetButton = document.getElementById("resetleButonu");
+        const stopAlarmButton = document.getElementById("alarmDurdurButonu");
+        const timeSelect = document.getElementById("zamanSec");
+        const alarm = document.getElementById("alarm");
+
+        startButton.addEventListener('click', () => {
+            if (isRunning) {
+                clearInterval(timer);
+                startButton.textContent = 'START';
+            } else {
+                startTimer(countDownTime);
+                startButton.textContent = 'STOP';
+                resetButton.style.display = 'inline-block';
+            }
+            isRunning = !isRunning;
+        });
+
+        resetButton.addEventListener('click', () => {
+            clearInterval(timer);
+            countDownTime = parseInt(timeSelect.value) * 60;
+            updateDisplay(countDownTime);
+            startButton.textContent = 'START';
+            isRunning = false;
+            stopAlarmButton.style.display = 'none';
+            alarm.pause();
+            alarm.currentTime = 0;
+        });
+
+        timeSelect.addEventListener('change', () => {
+            if (isRunning) {
+                clearInterval(timer);
+                isRunning = false;
+                startButton.textContent = 'START';
+            }
+            countDownTime = parseInt(timeSelect.value) * 60;
+            updateDisplay(countDownTime);
+        });
+
+        stopAlarmButton.addEventListener('click', () => {
+            alarm.pause();
+            alarm.currentTime = 0;
+            stopAlarmButton.style.display = 'none';
+        });
+
+        function startTimer(time) {
+            countDownTime = time;
+            timer = setInterval(() => {
+                if (countDownTime <= 0) {
+                    clearInterval(timer);
+                    isRunning = false;
+                    startButton.textContent = 'START';
+                    alarm.play();
+                    stopAlarmButton.style.display = 'inline-block';
+                } else {
+                    countDownTime--;
+                    updateDisplay(countDownTime);
+                }
+            }, 1000);
+        }
+
+        function updateDisplay(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = time % 60;
+            countDownElement.textContent = `${formatTime(minutes)}:${formatTime(seconds)}`;
+        }
+
+        function formatTime(num) {
+            return num < 10 ? `0${num}` : num;
+        }
+
+        updateDisplay(countDownTime); 
+
+
+        document.getElementById('baslatButonu').addEventListener('click', function() {
+    this.style.animation = 'bk 1s forwards'; 
+});
+
+
+
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,91 @@
+body {
+    font-size: 100%;
+    background-color: #159fa448;
+    margin: 0;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#baslatButonu {
+    font-size: large;
+    font-weight: bold;  
+    width: 350px;  
+    height: 50px; 
+    background-color: #09ae50;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    cursor:pointer;
+    animation:none;
+    transition: 1s;
+}
+
+@keyframes bk{
+    0%, 100%{
+        transform: scale(1);
+    }
+
+    50%{
+        transform: scale(1.2);
+    }
+}
+
+#alarmDurdurButonu {
+    font-size: large;
+    font-weight: bold;  
+    width: 350px;  
+    height: 50px; 
+    background-color: #1a8fc9;
+    border-radius: 7px;
+    margin-bottom: 10px; 
+    cursor:pointer;
+}
+
+#resetleButonu {
+    
+    font-weight: bold;
+    font-size: large;
+    width: 350px;  
+    height: 50px; 
+    background-color: #af1719;
+    border-radius: 7px;
+    padding: 0; 
+    margin-bottom: 10px; 
+    cursor:pointer;
+}
+
+#zamanSec {
+    font-size: large;
+    font-weight: bold;  
+    width: 350px;  
+    height: 50px;
+    background-color: #1aa9be;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    cursor:pointer;
+}
+
+.gerisayma {
+    font-size: 150px;
+   padding-left: 10px ;
+   display: flex;
+   justify-content: center; 
+ 
+  
+}
+
+.anasayfa {
+    margin-top: 200px;
+    width: 400px;
+    height: 500px;
+    background-color: hsl(180, 90%, 34%);
+    border-radius: 20px;
+    opacity: 1;
+}
+
+.butonlar {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
